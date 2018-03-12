@@ -5,13 +5,26 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-//@FeignClient(name="currency-exchange-service", url="localhost:8000")
-//@FeignClient(name="currency-exchange-service")
-@FeignClient(name="netflix-zuul-api-gateway-server")
+@FeignClient(name="currency-exchange-service")
 @RibbonClient(name="currency-exchange-service")
 public interface CurrencyExchangeServiceProxy {
-	//@GetMapping("/currency-exchange/from/{from}/to/{to}")
-	@GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")
+	
+	/*
+	    ALTERNATIVE WITHOUT FEIGN:
+	 
+	    Map<String, String> uriVariables = new HashMap<>();
+		uriVariables.put("from", from);
+		uriVariables.put("to", to);
+
+		ResponseEntity<CurrencyConversionBean> responseEntity = new RestTemplate().getForEntity(
+				"http://localhost:8000/currency-exchange/from/{from}/to/{to}", CurrencyConversionBean.class,
+				uriVariables);
+
+		CurrencyConversionBean response = responseEntity.getBody();
+	  
+	 */
+	
+	@GetMapping("/currency-exchange/from/{from}/to/{to}")
 	public CurrencyConversionBean retrieveExchangeValue
 		(@PathVariable("from") String from, @PathVariable("to") String to);
 }
