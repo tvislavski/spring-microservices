@@ -4,6 +4,7 @@
 - Eclipse & Embedded Maven
 - PostMan
 - Git Client - https://git-scm.com/
+- Project Lombok - https://projectlombok.org/download
 
 ## Running Examples
 - Download the zip or clone the Git repository.
